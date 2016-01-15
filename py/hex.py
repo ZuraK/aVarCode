@@ -46,6 +46,59 @@ def PrintInfo():
 # E 4,5;
 # F 5,0;
 
+# HexTriangles, Indices (Index 6 as Center)
+# A 6,0,1;
+# B 6,1,2;
+# etc
+
+# Triangle Fan -> Center(0),First(1),Second(2), ...
+
+# Hexagon area:
+# A = ((3 sqrt 3) / 2 ) size^2
+# Perimeter: 6 * size
+# Slices 60 deg, 60 deg, 60 deg
+# Total internal angles: 720 deg
+# Internal angle: 120 deg
+# 
+
+
+
+# Unicode Character 'WHITE HEXAGON' (U+2B21)
+# HTML Entity (decimal)                 &#11041;
+# HTML Entity (hex)                     &#x2b21;
+# How to type in Microsoft Windows      Alt +2B21
+# UTF-8 (hex)                           0xE2 0xAC 0xA1 (e2aca1)
+# UTF-8 (binary)                        11100010:10101100:10100001
+# UTF-16 (hex)                          0x2B21 (2b21)
+# UTF-16 (decimal)                      11,041
+# UTF-32 (hex)                          0x00002B21 (2B21)
+# UTF-32 (decimal)                      11,041
+# C/C++/Java source code                "\u2B21"
+# Python source code                    u"\u2B21"
+
+# Unicode Character 'BLACK HEXAGON' (U+2B22)
+# HTML Entity (decimal)                 &#11042;
+# HTML Entity (hex)                     &#x2b22;
+# How to type in Microsoft Windows      Alt +2B22
+# UTF-8 (hex)                           0xE2 0xAC 0xA2 (e2aca2)
+# UTF-8 (binary)                        11100010:10101100:10100010
+# UTF-16 (hex)                          0x2B22 (2b22)
+# UTF-16 (decimal)                      11,042
+# UTF-32 (hex)                          0x00002B22 (2b22)
+# UTF-32 (decimal)                      11,042
+# C/C++/Java source code                "\u2B22"
+# Python source code                    u"\u2B22"
+
+
+
+
+
+
+
+
+
+
+
 # hex grid flat, vertical orientation
 # Width = HexSize * 2
 # horiz = width * 3/4
