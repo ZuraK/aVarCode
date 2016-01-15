@@ -61,6 +61,13 @@ def PrintInfo():
 # Internal angle: 120 deg
 # 
 
+dirs:
+flat
+Lines: East, SouthEast, SouthWest, West, NorthWest, NorthEast
+Edges: SouthEast, South, SouthWest, NorthWest, North, NorthEast
+pointy
+Lines: SouthEast, South, SouthWest, NorthWest, North, NorthEast
+Edges: East, SouthEast, SouthWest, West, NorthWest, NorthEast
 
 
 # Unicode Character 'WHITE HEXAGON' (U+2B21)
