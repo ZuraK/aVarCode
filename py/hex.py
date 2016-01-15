@@ -33,7 +33,7 @@ def GenerateVectorsHEX(hType, center, radius):
 
 
 
-# HexEdges: Indicies
+# HexEdges, Indices
 # A 0,1;
 # B 1,2;
 # C 2,3;
@@ -41,6 +41,14 @@ def GenerateVectorsHEX(hType, center, radius):
 # E 4,5;
 # F 5,0;
 
+# hex grid flat, vertical orientation
+# Width = HexSize * 2
+# horiz = width * 3/4
+# height = sqrt(3)/2 * width.
+# dist vertical = height.
 
-
-
+# hex grid pointy, horizontal orientation
+# height = hxsize * 2
+# vert = height * 3/4
+# width = sqrt(3)/2 * height.
+# dist horiz = width.
