@@ -30,7 +30,12 @@ def GenerateVectorsHEX(hType, center, radius):
 	return vec;
   
 
-
+def PrintInfo():
+	print "=====[[ Hexagons ]]=====";
+	print "(00) Definitons, Equations, ";
+	print "(01) Storage, Tables, "
+	print "(02) Generation, ";
+	return;
 
 
 # HexEdges, Indices
@@ -52,3 +57,172 @@ def GenerateVectorsHEX(hType, center, radius):
 # vert = height * 3/4
 # width = sqrt(3)/2 * height.
 # dist horiz = width.
+
+offset coords
+# Pointy top                         Pointy top
+# "odd-r" Horizontal layout          "even-r" Horizontal layout
+# (0,0) (1,0) (2,0) (3,0) (4,0)	        (0,0) (1,0) (2,0) (3,0) (4,0)
+#    (0,1) (1,1) (2,1) (3,1) (4,1)   (0,1) (1,1) (2,1) (3,1) (4,1)
+# (0,2) (1,2) (2,2) (3,2) (4,2)         (0,2) (1,2) (2,2) (3,2) (4,2)
+#    (0,3) (1,3) (2,3) (3,3) (4,3)   (0,3) (1,3) (2,3) (3,3) (4,3)
+# (0,4) (1,4) (2,4) (3,4) (4,4)         (0,4) (1,4) (2,4) (3,4) (4,4)
+
+# Flat top                 Flat top
+# "odd-q" Vertical layout  "even-q" Vertical layout
+# (0,0) (2,0) (4,0)           (1,0) (3,0) (5,0)
+#    (1,0) (3,0) (5,0)     (0,0) (2,0) (4,0)
+# (0,1) (2,1) (4,1)           (1,1) (3,1) (5,1)
+#    (1,1) (3,1) (4,1)     (0,1) (2,1) (4,1)
+# (0,2) (2,2) (4,2)           (1,2) (3,2) (5,2)
+#    (1,2) (3,2) (5,2)     (0,2) (2,2) (4,2)
+
+
+cube coords
+axial coords	
+interlaced/doubled coords
+
+Coord conversions::
+
+function cube_to_hex(h): # axial
+    var q = h.x
+    var r = h.z
+    return Hex(q, r)
+
+function hex_to_cube(h): # axial
+    var x = h.q
+    var z = h.r
+    var y = -x-z
+    return Cube(x, y, z)
+    
+# convert cube to even-q offset
+col = x
+row = z + (x + (x&1)) / 2
+
+# convert even-q offset to cube
+x = col
+z = row - (col + (col&1)) / 2
+y = -x-z
+
+# convert cube to odd-q offset
+col = x
+row = z + (x - (x&1)) / 2
+
+# convert odd-q offset to cube
+x = col
+z = row - (col - (col&1)) / 2
+y = -x-z
+
+# convert cube to even-r offset
+col = x + (z + (z&1)) / 2
+row = z
+
+# convert even-r offset to cube
+x = col - (row + (row&1)) / 2
+z = row
+y = -x-z
+
+# convert cube to odd-r offset
+col = x + (z - (z&1)) / 2
+row = z
+
+# convert odd-r offset to cube
+x = col - (row - (row&1)) / 2
+z = row
+y = -x-z
+	
+
+NEIGHBOURS::
+>>cube<<
+
+var directions = [
+   Cube(+1, -1,  0), Cube(+1,  0, -1), Cube( 0, +1, -1),
+   Cube(-1, +1,  0), Cube(-1,  0, +1), Cube( 0, -1, +1)
+]
+
+function cube_direction(direction):
+    return directions[direction]
+
+function cube_neighbor(hex, direction):
+    return cube_add(hex, cube_direction(direction))
+    
+
+    
+>>axial<<
+
+var directions = [
+   Hex(+1,  0), Hex(+1, -1), Hex( 0, -1),
+   Hex(-1,  0), Hex(-1, +1), Hex( 0, +1)
+]
+
+function hex_direction(direction):
+    return directions[direction]
+
+function hex_neighbor(hex, direction):
+    var dir = hex_direction(direction)
+    return Hex(hex.q + dir.q, hex.r + dir.r)
+
+
+    
+>>offset<< (4 different implementations depending on grid type)
+
+>>odd-r<<
+var directions = [
+   [ Hex(+1,  0), Hex( 0, -1), Hex(-1, -1),
+     Hex(-1,  0), Hex(-1, +1), Hex( 0, +1) ],
+   [ Hex(+1,  0), Hex(+1, -1), Hex( 0, -1),
+     Hex(-1,  0), Hex( 0, +1), Hex(+1, +1) ]
+]
+
+function offset_neighbor(hex, direction):
+    var parity = hex.row & 1
+    var dir = directions[parity][direction]
+    return Hex(hex.col + dir.col, hex.row + dir.row)
+
+>>even-r<<
+var directions = [
+   [ Hex(+1,  0), Hex(+1, -1), Hex( 0, -1),
+     Hex(-1,  0), Hex( 0, +1), Hex(+1, +1) ],
+   [ Hex(+1,  0), Hex( 0, -1), Hex(-1, -1),
+     Hex(-1,  0), Hex(-1, +1), Hex( 0, +1) ]
+]
+
+function offset_neighbor(hex, direction):
+    var parity = hex.row & 1
+    var dir = directions[parity][direction]
+    return Hex(hex.col + dir.col, hex.row + dir.row)
+    
+>>odd-q<<
+var directions = [
+   [ Hex(+1,  0), Hex(+1, -1), Hex( 0, -1),
+     Hex(-1, -1), Hex(-1,  0), Hex( 0, +1) ],
+   [ Hex(+1, +1), Hex(+1,  0), Hex( 0, -1),
+     Hex(-1,  0), Hex(-1, +1), Hex( 0, +1) ]
+]
+
+function offset_neighbor(hex, direction):
+    var parity = hex.col & 1
+    var dir = directions[parity][direction]
+    return Hex(hex.col + dir.col, hex.row + dir.row)
+    
+>>even-q<<
+var directions = [
+   [ Hex(+1, +1), Hex(+1,  0), Hex( 0, -1),
+     Hex(-1,  0), Hex(-1, +1), Hex( 0, +1) ],
+   [ Hex(+1,  0), Hex(+1, -1), Hex( 0, -1),
+     Hex(-1, -1), Hex(-1,  0), Hex( 0, +1) ]
+]
+
+function offset_neighbor(hex, direction):
+    var parity = hex.col & 1
+    var dir = directions[parity][direction]
+    return Hex(hex.col + dir.col, hex.row + dir.row)
+    
+    
+>>Diagonals<<
+var diagonals = [
+   Cube(+2, -1, -1), Cube(+1, +1, -2), Cube(-1, +2, -1), 
+   Cube(-2, +1, +1), Cube(-1, -1, +2), Cube(+1, -2, +1)
+]
+
+function cube_diagonal_neighbor(hex, direction):
+    return cube_add(hex, diagonals[direction])
