@@ -29,3 +29,18 @@ def GenerateVectorsHEX(hType, center, radius):
 		vec[val].y = center.y + size * sin(angle_rad);
 	return vec;
   
+
+
+
+
+# HexEdges: Indicies
+# A 0,1;
+# B 1,2;
+# C 2,3;
+# D 3,4;
+# E 4,5;
+# F 5,0;
+
+
+
+
