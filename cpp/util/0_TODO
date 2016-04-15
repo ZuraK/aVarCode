@@ -1,0 +1,18 @@
+
+
+[READ/WRITE]
+Format: Text/Binary
+Read: File/Stream/Chunk/DirectToStruct
+
+[PARSE&DATABASE]
+ * cfg/ini
+ * bytecode?
+ * #-form
+ * {}-form
+ * XML
+ * Postgres
+ 
+
+
+
+
