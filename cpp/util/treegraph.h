@@ -8,20 +8,20 @@ namespace Util
     BinaryTreeNode *Right;
   };
   
-  class BinaryTree
-  {
-    public:
-        BinaryTree();
-        ~BinaryTree();
+	class BinaryTree
+	{
+		public:
+			BinaryTree();
+			~BinaryTree();
 
-        void insert(int key);
-        BinaryTreeNode *search(int key);
-        void destroy_tree();
+			void Insert(int key);
+			BinaryTreeNode *Search(int key);
+			void DestroyTree();
 
-    private:
-        void destroy_tree(BinaryTreeNode *leaf);
-        void insert(int key, BinaryTreeNode *leaf);
-        BinaryTreeNode *search(int key, BinaryTreeNode *leaf);
-        BinaryTreeNode *root;
-  };
+		private:
+			void DestroyTree(BinaryTreeNode *leaf);
+			void Insert(int key, BinaryTreeNode *leaf);
+			BinaryTreeNode *Search(int key, BinaryTreeNode *leaf);
+			BinaryTreeNode *m_Root;
+	};
 }
