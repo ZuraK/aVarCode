@@ -12,7 +12,47 @@ Read: File/Stream/Chunk/DirectToStruct
  * XML
  * Postgres
  
+[DATA_LOC]
+ * MEM
+ * DISK
+ * LOCKED
+   [DATA_USE.WGT]
+   0: Rare
+   1: All the time
+ 
 
 
 
+Window
+Multiple viewports
+Frames
+Controls
+OpenGL GUI
 
+
+-Load:
+Full load, halt and load everything before cont
+Stagg load, load everything ignore stutters
+Segmented load, load small segments during process
+Balanced load, load without disturbing other proc
+
+Stat
+-Abbrev, Name, Icon, Tooltip, Value, 
+
+StatElement
+
+struct StatElement
+{
+}
+char[3] abbrev
+char[7] longabbrev
+char[128] name
+uuid code
+
+tooltip
+iconlist, name, size, ref
+type, primary, secondary, derived
+
+StatObj.AddElement(
+-Abbrev.3, <code or "str">
+StatObj.AddDefault(<preloaded>)
