@@ -56,3 +56,30 @@ type, primary, secondary, derived
 StatObj.AddElement(
 -Abbrev.3, <code or "str">
 StatObj.AddDefault(<preloaded>)
+
+
+Module compiled into driver
+Module external compile, runtime load
+Module runtime scripted
+
+Runtime code compile and execution
+Runtime code execution
+
+
+[Memory management]
+* Fixed
+* Dynamic (Grow/Shrink)
+* Fixed + Dynamic
+* Reservation
+* Swap
+
+
+[Some modules]
+* TELNET
+* SSH
+* FTP
+* FTPS or SFTP
+* HTTP
+* HTTPS
+
+and, and_eq, bitand, bitor, compl, not, not_eq, or, or_eq, xor, xor_eq
