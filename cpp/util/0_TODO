@@ -1,5 +1,27 @@
 
 
+(P)
+p = V * I
+p = R * I^2
+p = V^2 / R
+
+(V)
+V = R * I
+V = P / I
+V = SQ( p * R )
+
+(R)
+R = V / I
+R = V^2/p
+R = P / I^2
+
+(I)
+I = SQ(P/R)
+I = p / V
+I = V / R
+
+
+
 [READ/WRITE]
 Format: Text/Binary
 Read: File/Stream/Chunk/DirectToStruct
